@@ -14,15 +14,10 @@ def create_decision(db: Session, user, data):
     return decision
 
 def get_all_decisions(db: Session, user):
-    if user.get("role") == "ADMIN":
-        return db.query(Decision).all()
-    return db.query(Decision).filter(Decision.user_id == user.get("sub")).all
+    return db.query(Decision).all()
 
 def get_decision_by_id(db: Session, decision_id: str, user):
-    query = db.query(Decision).filter(Decision.id == decision_id)
-    if user.get("role") != "ADMIN":
-        query = query.filter(Decision.user_id == user.get("sub"))
-    decision = query.first()
+    decision = db.query(Decision).filter(Decision.id == decision_id).first()
     if not decision:
         raise HTTPException(status_code=404, detail="Decision not found")
     return decision
