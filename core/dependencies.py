@@ -16,6 +16,6 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
         raise HTTPException(status_code=401, detail="Invalid token")
     
 def admin_required(current_user: dict = Depends(get_current_user)):
-    if current_user.get("role") != "admin":
+    if current_user.get("role") != "ADMIN":
         raise HTTPException(status_code=403, detail="Admin privileges required")
     return current_user
