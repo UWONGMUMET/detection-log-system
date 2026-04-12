@@ -9,7 +9,7 @@ from core.dependencies import get_current_user
 router = APIRouter(prefix="/decisions", tags=["decisions"])
 
 @router.post("/", response_model=DecisionResponse)
-def create_decision(data: DecisionCreate, db: Session = Depends(get_db), user = Depends(get_current_user)):
+def create(data: DecisionCreate, db: Session = Depends(get_db), user = Depends(get_current_user)):
     return create_decision(db, user, data)
 
 @router.get("/", response_model=list[DecisionResponse])
