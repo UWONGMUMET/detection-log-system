@@ -5,7 +5,7 @@ from core.security import hash_password
 def seed_admin():
     db = SessionLocal()
 
-    admin_email = "admin@example.com"
+    admin_email = "admin1@example.com"
 
     existing = db.query(User).filter(User.email == admin_email).first()
     if existing:
@@ -15,7 +15,7 @@ def seed_admin():
     admin = User(
         email=admin_email,
         password=hash_password("admin123"),
-        role="admin"
+        role="ADMIN"
     )
 
     db.add(admin)
