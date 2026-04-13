@@ -62,6 +62,7 @@ def delete_decision(db: Session, decision_id: str, user):
         raise HTTPException(status_code=403, detail="Not authorized to delete this decision")
     
     log_history(db, decision.id, user.get("sub"), "DELETE")
+    db.commit()
     
     db.delete(decision)
     db.commit()
