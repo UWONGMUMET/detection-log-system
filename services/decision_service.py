@@ -42,6 +42,7 @@ def update_decision(db: Session, decision_id: str, data, user):
                 db,
                 decision.id,
                 user.get("sub"),
+                "UPDATE",
                 field=key,
                 old=old_value,
                 new=value
