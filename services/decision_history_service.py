@@ -2,14 +2,14 @@ from sqlalchemy.orm import Session
 from models.decision_history import DecisionHistory
 from fastapi import HTTPException
 
-def log_history(db: Session, data):
+def log_history(db: Session, decision_id, user_id, action, field=None, old=None, new=None):
     history = DecisionHistory(
-        decision_id = data.decision_id,
-        user_id = data.user_id,
-        action = data.action,
-        field = data.field,
-        old_value = str(data.old) if data.old else None,
-        new_value = str(data.new) if data.new else None
+        decision_id = decision_id,
+        user_id = user_id,
+        action = action,
+        field = field,
+        old_value = str(old) if old else None,
+        new_value = str(new) if new else None
     )
     db.add(history)
 
