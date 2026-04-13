@@ -1,4 +1,5 @@
 from sqlalchemy import Column, String, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
 from datetime import datetime
 import uuid
 from db.base import Base
@@ -13,4 +14,8 @@ class Decision(Base):
     status = Column(String, nullable=False, default="PENDING")  # PENDING, APPROVED, REJECTED
 
     user_id = Column(String, ForeignKey("users.id"))
+
+    histories = relationship(
+        "DecisionHistory", cascade="all, delete", passive_deletes=True
+    )
     created_at = Column(DateTime, default=datetime.utcnow)
