@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import auth, user, user_dashboard, decision, vote
+from routers import auth, user, user_dashboard, decision, vote, decision_history
 from core.config import settings
 
 app = FastAPI(debug=settings.DEBUG)
@@ -9,6 +9,7 @@ app.include_router(user.router)
 app.include_router(user_dashboard.router)
 app.include_router(decision.router)
 app.include_router(vote.router)
+app.include_router(decision_history.router)
 
 @app.get("/")
 def read_root():
